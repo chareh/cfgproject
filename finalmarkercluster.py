@@ -5,7 +5,7 @@ import os
 import glob 
 from convertbng.util import convert_lonlat
 
-path =r'/users/charlotte1/documents/codefirstgirls/vehicleaccidents' 
+path =r'/users/charlotte1/documents/cfgproject/vehicleaccidents' 
 allFiles = glob.glob(path + '/*.csv')
 frame = pd.DataFrame()
 list_ = []

@@ -5,7 +5,7 @@ import os
 import glob 
 from convertbng.util import convert_lonlat
 
-path =r'/users/charlotte1/documents/codefirstgirls/vehicleaccidents' 
+path =r'/users/charlotte1/documents/cfgproject/vehicleaccidents' 
 allFiles = glob.glob(path + '/*.csv')
 frame = pd.DataFrame()
 list_ = []
@@ -21,7 +21,7 @@ frame2 = frame[['Accident Ref.','Borough', 'Easting', 'Northing', 'Vehicle Type'
 df = frame2
 onlypedals = df[df['Vehicle Type'].str.contains('Pedal')]
 
-onlypedals.to_csv('datanew.csv')
+onlypedals.to_csv('/users/charlotte1/documents/cfgproject/datanew.csv')
 
 eastings = onlypedals['Easting']
 northings = onlypedals['Northing']
@@ -29,10 +29,10 @@ converted_coords = convert_lonlat(eastings, northings)
 
 df = pd.DataFrame(list(converted_coords), index=['Y', 'X'])
 df2 = df.T    
-df2.to_csv('/users/charlotte1/documents/convertedcoords.csv')
+df2.to_csv('convertedcoords.csv')
 
-a = pd.read_csv('/users/charlotte1/documents/datanew.csv')
-b = pd.read_csv('/users/charlotte1/documents/convertedcoords.csv')
+a = pd.read_csv('/users/charlotte1/documents/cfgproject/datanew.csv')
+b = pd.read_csv('/users/charlotte1/documents/cfgproject/convertedcoords.csv')
 data2 = pd.concat([a, b], axis =1)
 data2.to_csv('finaldata.csv')
 
@@ -41,7 +41,7 @@ cyclemap = folium.Map(location = [51.5074, -0.1278],
                   zoom_start = 11, 
                   width = 600, height = 400)
 
-cycleincidences = pd.read_csv('/users/charlotte1/documents/finaldata.csv')
+cycleincidences = pd.read_csv('/users/charlotte1/documents/cfgproject/finaldata.csv')
 
 heat_map = HeatMap(zip(cycleincidences.X.values, cycleincidences.Y.values), 
                    min_opacity=0.2,
