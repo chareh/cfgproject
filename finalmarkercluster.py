@@ -21,7 +21,7 @@ frame2 = frame[['Accident Ref.','Borough', 'Easting', 'Northing', 'Vehicle Type'
 df = frame2
 onlypedals = df[df['Vehicle Type'].str.contains('Pedal')]
 
-onlypedals.to_csv('datanew.csv')
+onlypedals.to_csv('/users/charlotte1/documents/cfgproject/datanew.csv')
 
 eastings = onlypedals['Easting']
 northings = onlypedals['Northing']
@@ -31,24 +31,23 @@ df = pd.DataFrame(list(converted_coords), index=['Y', 'X'])
 df2 = df.T    
 df2.to_csv('convertedcoords.csv')
 
-a = pd.read_csv('/users/charlotte1/documents/datanew.csv')
-b = pd.read_csv('/users/charlotte1/documents/convertedcoords.csv')
+a = pd.read_csv('/users/charlotte1/documents/cfgproject/datanew.csv')
+b = pd.read_csv('/users/charlotte1/documents/cfgproject/convertedcoords.csv')
 data2 = pd.concat([a, b], axis =1)
 data2.to_csv('finaldata.csv')
 
-cycleincidences = pd.read_csv('/users/charlotte1/documents/finaldata.csv')
-
 cyclemap = folium.Map(location = [51.5074, -0.1278],
-                      tiles='CartoDB positron',
-                      zoom_start = 11, 
-                      width = 800, height = 600)
+                  tiles='CartoDB positron',
+                  zoom_start = 11, 
+                  width = 600, height = 400)
+
+cycleincidences = pd.read_csv('/users/charlotte1/documents/cfgproject/finaldata.csv')
 
 marker_cluster = MarkerCluster().add_to(cyclemap)
-
 
 for each in cycleincidences.iterrows():
      folium.Marker(
         location = [each[1]['X'],each[1]['Y']]
         ).add_to(marker_cluster)
      
-cyclemap.save('cylesmap4.html')
+cyclemap.save('cyclesmap4.html')

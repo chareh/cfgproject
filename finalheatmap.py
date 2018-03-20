@@ -49,4 +49,4 @@ heat_map = HeatMap(zip(cycleincidences.X.values, cycleincidences.Y.values),
                    max_zoom=10, 
                  )
 cyclemap.add_child(heat_map)
-cyclemap.save('cylesmap43.html')
+cyclemap.save('cyclesmap43.html')
